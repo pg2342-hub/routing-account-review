@@ -1,0 +1,37 @@
+name: record
+# Manual: calls Claude for the weekly notes and saves the replies to recordings/.
+# Needs the ANTHROPIC_API_KEY secret. Optional WEAVE_ROUTER_KEY records the shadow run.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    env:
+      WEAVE_ROUTER_KEY: ${{ secrets.WEAVE_ROUTER_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[claude,dev]"
+      - name: Record notes
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          for w in week1 week2; do
+            python -m account_review.cli synth --week $w --out exports/$w.ndjson
+            python -m account_review.cli review exports/$w.ndjson --note record
+          done
+      - name: Record shadow run
+        if: ${{ env.WEAVE_ROUTER_KEY != '' }}
+        run: python -m account_review.cli shadow --record
+      - name: Rebuild demo page
+        run: python scripts/build_demo.py
+      - run: |
+          git config user.name "Pranav Gudise"
+          git config user.email "273664482+pg2342-hub@users.noreply.github.com"
+          git add recordings docs
+          git diff --cached --quiet || git commit -m "Record Claude notes and rebuild the demo page"
+          git push

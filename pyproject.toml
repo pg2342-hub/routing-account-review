@@ -1,0 +1,19 @@
+[project]
+name = "routing-account-review"
+version = "0.1.0"
+description = "Weekly account review from a model router's routing-decision export, with a go/no-go on widening rollout."
+requires-python = ">=3.11"
+dependencies = ["golive-gate==0.1.1"]
+
+[project.optional-dependencies]
+claude = ["anthropic>=0.70"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.ruff]
+line-length = 140
+
+[tool.setuptools]
+packages = ["account_review"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

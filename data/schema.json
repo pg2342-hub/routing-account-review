@@ -1,0 +1,587 @@
+{
+ "source": "weave-os/router internal/analytics/schema.go @ f9f86db",
+ "fields": [
+  {
+   "name": "id",
+   "type": "string",
+   "nullable": false,
+   "description": "Unique id of this routing decision row."
+  },
+  {
+   "name": "recorded_at",
+   "type": "timestamp",
+   "nullable": false,
+   "description": "Ingest time. The export is ordered and paged on this, not on requested_at."
+  },
+  {
+   "name": "requested_at",
+   "type": "timestamp",
+   "nullable": false,
+   "description": "Event time of the routed turn. Can move backwards within a page."
+  },
+  {
+   "name": "request_id",
+   "type": "string",
+   "nullable": false,
+   "description": "Router request id. One request id can span several rows (retry, failover)."
+  },
+  {
+   "name": "trace_id",
+   "type": "string",
+   "nullable": false,
+   "description": "Trace id correlating this decision with emitted spans."
+  },
+  {
+   "name": "session_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Client session id, when the client supplied one."
+  },
+  {
+   "name": "rollout_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Client-supplied rollout identifier used to join benchmark tasks and rewards."
+  },
+  {
+   "name": "device_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Client device id, when the client supplied one."
+  },
+  {
+   "name": "client_app",
+   "type": "string",
+   "nullable": true,
+   "description": "Calling application as reported by the client."
+  },
+  {
+   "name": "turn_type",
+   "type": "string",
+   "nullable": true,
+   "description": "Turn classification: main_loop, tool_result, probe, title_gen, compaction, classifier, recap, sub_agent_dispatch. Filter on main_loop to count user-visible turns."
+  },
+  {
+   "name": "user_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Router-assigned end-user id, stable within the installation."
+  },
+  {
+   "name": "user_email",
+   "type": "string",
+   "nullable": true,
+   "description": "End-user email as supplied by the client."
+  },
+  {
+   "name": "user_account_uuid",
+   "type": "string",
+   "nullable": true,
+   "description": "End-user account uuid as supplied by the client."
+  },
+  {
+   "name": "requested_model",
+   "type": "string",
+   "nullable": true,
+   "description": "Model the caller asked for."
+  },
+  {
+   "name": "decision_model",
+   "type": "string",
+   "nullable": true,
+   "description": "Model the router served."
+  },
+  {
+   "name": "decision_provider",
+   "type": "string",
+   "nullable": true,
+   "description": "Upstream provider that served the turn."
+  },
+  {
+   "name": "route_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Identifier of the routing decision path."
+  },
+  {
+   "name": "routing_strategy",
+   "type": "string",
+   "nullable": true,
+   "description": "Routing strategy that selected the served model."
+  },
+  {
+   "name": "policy_route_key",
+   "type": "string",
+   "nullable": true,
+   "description": "Stable route key emitted by the active routing policy."
+  },
+  {
+   "name": "cluster_router_version",
+   "type": "string",
+   "nullable": true,
+   "description": "Version of the cluster router that scored the turn."
+  },
+  {
+   "name": "candidate_models",
+   "type": "string[]",
+   "nullable": true,
+   "description": "Models the router considered for this turn."
+  },
+  {
+   "name": "chosen_score",
+   "type": "float",
+   "nullable": true,
+   "description": "Score of the served model within the candidate set. Comparable within a row, not across rows."
+  },
+  {
+   "name": "decision_reason",
+   "type": "string",
+   "nullable": true,
+   "description": "Free-form diagnostic prose explaining the decision. NOT a stable enum: the format changes between router versions, so do not parse it."
+  },
+  {
+   "name": "blind_experiment_arm",
+   "type": "string",
+   "nullable": true,
+   "description": "Effective blind experiment arm: router_on or passthrough. Null outside an active experiment."
+  },
+  {
+   "name": "blind_experiment_assignment_source",
+   "type": "string",
+   "nullable": true,
+   "description": "Whether the effective experiment arm came from automatic allocation or a manual override. Null outside an active experiment."
+  },
+  {
+   "name": "blind_experiment_subject_key",
+   "type": "string",
+   "nullable": true,
+   "description": "Canonical subject key used for the experiment assignment. Null outside an active experiment."
+  },
+  {
+   "name": "blind_experiment_mode",
+   "type": "string",
+   "nullable": true,
+   "description": "Experiment mode the arm came from: user, cohort, or session. Null outside an active experiment."
+  },
+  {
+   "name": "blind_experiment_session_key",
+   "type": "string",
+   "nullable": true,
+   "description": "Opaque credential-scoped client session key the arm was drawn from. Null outside session mode or when the client sent no session id."
+  },
+  {
+   "name": "cohort_experiment_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Frozen cohort experiment identifier; null on legacy installations."
+  },
+  {
+   "name": "cohort_group_id",
+   "type": "integer",
+   "nullable": true,
+   "description": "Fixed group number for the linked roster member."
+  },
+  {
+   "name": "cohort_phase_index",
+   "type": "integer",
+   "nullable": true,
+   "description": "Scheduled phase at request time."
+  },
+  {
+   "name": "cohort_revision",
+   "type": "integer",
+   "nullable": true,
+   "description": "Immutable schedule revision used at request time."
+  },
+  {
+   "name": "cohort_scheduled_arm",
+   "type": "string",
+   "nullable": true,
+   "description": "Assigned treatment before an operator override."
+  },
+  {
+   "name": "cohort_treatment_applied",
+   "type": "boolean",
+   "nullable": true,
+   "description": "Whether the scheduled cohort treatment was in effect; false on a force-model, hard-pin, usage-bypass or undispatched turn. A client-named model still counts as applied here; use blind_experiment_treatment_applied for whether the treatment chose the model."
+  },
+  {
+   "name": "cohort_bypass_reason",
+   "type": "string",
+   "nullable": true,
+   "description": "Why scheduled treatment did not apply (including unassigned or disabled identities)."
+  },
+  {
+   "name": "blind_experiment_model_source",
+   "type": "string",
+   "nullable": true,
+   "description": "What chose the served model on an experiment turn: router, experiment_passthrough, client_model_passthrough, routing_policy_passthrough, hard_pin, force_model, usage_bypass or not_dispatched. Null outside an active experiment."
+  },
+  {
+   "name": "blind_experiment_treatment_applied",
+   "type": "boolean",
+   "nullable": true,
+   "description": "Whether the assigned arm's treatment chose the model (router on router_on, experiment_passthrough on passthrough). Null outside an active experiment."
+  },
+  {
+   "name": "blind_experiment_baseline_model",
+   "type": "string",
+   "nullable": true,
+   "description": "Model the client would get without routing: the requested model, or the client default for an automatic-routing alias or an unknown model id. Null outside an active experiment, or for an automatic-routing alias from a client with no default."
+  },
+  {
+   "name": "blind_experiment_model_changed",
+   "type": "boolean",
+   "nullable": true,
+   "description": "Whether the served model (decision_model, after any retry) differs from blind_experiment_baseline_model. Null outside an active experiment, when the turn was not dispatched, or when there is no baseline."
+  },
+  {
+   "name": "policy_pin_requested",
+   "type": "boolean",
+   "nullable": true,
+   "description": "True when the caller sent an x-weave-policy-pin header. Null when no pin was requested."
+  },
+  {
+   "name": "policy_pin_honoured",
+   "type": "boolean",
+   "nullable": true,
+   "description": "True when the turn was served by exactly the pinned policy artifact and roster. False when the pin was ignored (installation not authorized) or unservable. Null when no pin was requested."
+  },
+  {
+   "name": "sticky_hit",
+   "type": "boolean",
+   "nullable": false,
+   "description": "True when the turn reused a session-sticky decision instead of scoring fresh."
+  },
+  {
+   "name": "failover_used",
+   "type": "boolean",
+   "nullable": false,
+   "description": "True when the first-choice upstream failed and another served the turn."
+  },
+  {
+   "name": "cross_format",
+   "type": "boolean",
+   "nullable": false,
+   "description": "True when the request was translated between API formats (e.g. Anthropic to OpenAI)."
+  },
+  {
+   "name": "error_class",
+   "type": "string",
+   "nullable": true,
+   "description": "How the turn failed: rate_limited, invalid_request, auth_rejected, model_not_found, upstream_4xx, upstream_5xx, stream_cut, stream_stalled (the router's stream watchdog ended a stalled stream), timeout, client_canceled, routing_refused, funding_refused (refused before any upstream call because no customer funding source could serve the turn; a throttled subscription records rate_limited), refusal, max_tokens, invalid_tool_args or other. Null on a normal completion."
+  },
+  {
+   "name": "failure_owner",
+   "type": "string",
+   "nullable": true,
+   "description": "Who owns the turn's failure: provider (timeouts, 5xx, overload, stalled or cut streams, refusals, 400/422 on a body the router sent unchanged), router (routing or policy outages, impossible translations, setup errors, 400/422 on a body the router rewrote), client (cancellation, oversized context, invalid request, unknown forced model, spend or credit limits, org configuration) or unknown. Null on a normal completion."
+  },
+  {
+   "name": "estimated_input_tokens",
+   "type": "integer",
+   "nullable": true,
+   "description": "Input tokens estimated at decision time, before the upstream reported actuals."
+  },
+  {
+   "name": "input_tokens",
+   "type": "integer",
+   "nullable": true,
+   "description": "Input tokens reported by the upstream."
+  },
+  {
+   "name": "output_tokens",
+   "type": "integer",
+   "nullable": true,
+   "description": "Output tokens reported by the upstream."
+  },
+  {
+   "name": "cache_creation_tokens",
+   "type": "integer",
+   "nullable": true,
+   "description": "Tokens written to the upstream prompt cache."
+  },
+  {
+   "name": "cache_read_tokens",
+   "type": "integer",
+   "nullable": true,
+   "description": "Tokens served from the upstream prompt cache."
+  },
+  {
+   "name": "cache_creation_1h_tokens",
+   "type": "integer",
+   "nullable": true,
+   "description": "Share of cache_creation_tokens written with the 1-hour TTL, priced at cache_write_1h_multiplier from /v1/analytics/models. Null when the turn wrote no cache or predates the column."
+  },
+  {
+   "name": "reasoning_tokens",
+   "type": "integer",
+   "nullable": true,
+   "description": "Share of output_tokens spent on reasoning; already included in output_tokens and priced at the output rate. Null when the upstream does not break reasoning out (Anthropic) or the row predates the column."
+  },
+  {
+   "name": "speed",
+   "type": "string",
+   "nullable": true,
+   "description": "Serving speed the upstream reported (e.g. fast); fast turns are priced at the binding's fast rate. Null when not reported."
+  },
+  {
+   "name": "inference_geo",
+   "type": "string",
+   "nullable": true,
+   "description": "Inference geography the upstream reported; \\\"us\\\" applies us_inference_geo_multiplier to every token category. Null when not reported."
+  },
+  {
+   "name": "subscription_served",
+   "type": "boolean",
+   "nullable": false,
+   "description": "True when the turn used included Claude/Codex subscription quota. Paid Claude overage is false, even if the OAuth credential served the turn."
+  },
+  {
+   "name": "credential_source",
+   "type": "string",
+   "nullable": true,
+   "description": "Winning credential source; null when attribution was not recorded."
+  },
+  {
+   "name": "subscription_account_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Stable physical subscription account that served the request; null for request-local OAuth and API capacity."
+  },
+  {
+   "name": "subscription_owner_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Verified subscription owner; distinct from the requesting subscriber for shared capacity."
+  },
+  {
+   "name": "subscription_tier",
+   "type": "string",
+   "nullable": true,
+   "description": "Winning subscription tier: personal or shared."
+  },
+  {
+   "name": "intended_model_family",
+   "type": "string",
+   "nullable": true,
+   "description": "Canonical family selected before subscription alternatives."
+  },
+  {
+   "name": "final_model_family",
+   "type": "string",
+   "nullable": true,
+   "description": "Canonical family that served the request."
+  },
+  {
+   "name": "actual_input_cost_usd",
+   "type": "float",
+   "nullable": true,
+   "description": "Input cost of the model that actually served the turn. 0 when subscription_served."
+  },
+  {
+   "name": "actual_output_cost_usd",
+   "type": "float",
+   "nullable": true,
+   "description": "Output cost of the model that actually served the turn. 0 when subscription_served."
+  },
+  {
+   "name": "api_rate_input_cost_usd",
+   "type": "float",
+   "nullable": true,
+   "description": "Input cost of the served turn at API rates. Equals actual_input_cost_usd unless subscription_served."
+  },
+  {
+   "name": "api_rate_output_cost_usd",
+   "type": "float",
+   "nullable": true,
+   "description": "Output cost of the served turn at API rates. Equals actual_output_cost_usd unless subscription_served."
+  },
+  {
+   "name": "route_latency_ms",
+   "type": "integer",
+   "nullable": true,
+   "description": "Time spent choosing a model."
+  },
+  {
+   "name": "upstream_latency_ms",
+   "type": "integer",
+   "nullable": true,
+   "description": "Time spent waiting on the upstream provider."
+  },
+  {
+   "name": "total_latency_ms",
+   "type": "integer",
+   "nullable": true,
+   "description": "End-to-end time for the action."
+  },
+  {
+   "name": "ttft_ms",
+   "type": "integer",
+   "nullable": true,
+   "description": "Time to first token on a streamed response."
+  },
+  {
+   "name": "upstream_status_code",
+   "type": "integer",
+   "nullable": true,
+   "description": "HTTP status returned by the upstream provider."
+  },
+  {
+   "name": "upstream_finish_reason",
+   "type": "string",
+   "nullable": true,
+   "description": "Finish reason reported by the upstream provider."
+  },
+  {
+   "name": "stop_reason",
+   "type": "string",
+   "nullable": true,
+   "description": "Normalized stop reason for the turn."
+  },
+  {
+   "name": "tool_use_blocks",
+   "type": "integer",
+   "nullable": true,
+   "description": "Count of tool-use blocks in the response."
+  },
+  {
+   "name": "invalid_tool_args_blocks",
+   "type": "integer",
+   "nullable": true,
+   "description": "Count of tool-use blocks whose arguments failed to parse."
+  },
+  {
+   "name": "subscriber_plan",
+   "type": "string",
+   "nullable": true,
+   "description": "Router subscription plan that admitted the turn."
+  },
+  {
+   "name": "entitlement_version",
+   "type": "integer",
+   "nullable": true,
+   "description": "Monotonic subscriber entitlement version used for admission."
+  },
+  {
+   "name": "capacity_source",
+   "type": "string",
+   "nullable": true,
+   "description": "Capacity that funded the turn: included_router, linked_claude, linked_codex, prepaid, or billing_override."
+  },
+  {
+   "name": "retail_usage_usd_micros",
+   "type": "integer",
+   "nullable": true,
+   "description": "Retail value of the served model usage in USD micros, independent of funding source."
+  },
+  {
+   "name": "included_usage_usd_micros",
+   "type": "integer",
+   "nullable": true,
+   "description": "Retail usage funded by included Router allowance; null for other capacity sources."
+  },
+  {
+   "name": "linked_usage_usd_micros",
+   "type": "integer",
+   "nullable": true,
+   "description": "Retail usage served by a linked Claude or Codex subscription; null for other capacity sources."
+  },
+  {
+   "name": "prepaid_usage_usd_micros",
+   "type": "integer",
+   "nullable": true,
+   "description": "Retail usage funded by subscriber prepaid balance; null for other capacity sources."
+  },
+  {
+   "name": "settlement_failed",
+   "type": "boolean",
+   "nullable": true,
+   "description": "Whether included-allowance or prepaid settlement failed after serving. Null when no Router settlement applies."
+  },
+  {
+   "name": "serving_profile_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Server-owned Router profile used to serve the turn."
+  },
+  {
+   "name": "serving_profile_version",
+   "type": "string",
+   "nullable": true,
+   "description": "Immutable revision of the server-owned Router profile."
+  },
+  {
+   "name": "serving_release_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Verified serving release identifier."
+  },
+  {
+   "name": "serving_binding_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Verified serving binding identifier."
+  },
+  {
+   "name": "serving_target",
+   "type": "string",
+   "nullable": true,
+   "description": "Managed serving target that admitted the turn: staging, prod/stable, or prod/weave-internal."
+  },
+  {
+   "name": "boost_optimizer_version",
+   "type": "string",
+   "nullable": true,
+   "description": "Boost source optimizer version used for selection."
+  },
+  {
+   "name": "policy_artifact_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Routing policy artifact identifier."
+  },
+  {
+   "name": "policy_artifact_sha256",
+   "type": "string",
+   "nullable": true,
+   "description": "SHA-256 digest of the routing policy artifact."
+  },
+  {
+   "name": "roster_version",
+   "type": "string",
+   "nullable": true,
+   "description": "Immutable routing roster version."
+  },
+  {
+   "name": "selection_policy_release_id",
+   "type": "string",
+   "nullable": true,
+   "description": "Selection-policy release identifier."
+  },
+  {
+   "name": "selection_policy_sha256",
+   "type": "string",
+   "nullable": true,
+   "description": "SHA-256 digest of the selection policy."
+  },
+  {
+   "name": "client_git_head_sha",
+   "type": "string",
+   "nullable": true,
+   "description": "Client-reported HEAD sha of the tree a trial-mode session started from, abbreviated as the client printed it (compare by prefix). Stamped on the session's first turn only; null elsewhere."
+  },
+  {
+   "name": "client_git_branch",
+   "type": "string",
+   "nullable": true,
+   "description": "Client-reported branch of the tree a trial-mode session started from. First turn only; null elsewhere."
+  },
+  {
+   "name": "client_git_dirty",
+   "type": "boolean",
+   "nullable": true,
+   "description": "True when the client-reported starting tree had uncommitted changes. Null when not captured, so null and false are distinct."
+  }
+ ]
+}

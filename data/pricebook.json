@@ -1,0 +1,2644 @@
+{
+  "models": [
+    {
+      "id": "claude-haiku-4-5",
+      "tier": "low",
+      "context_window": 200000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 1,
+          "output_usd_per_1m": 5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 1,
+          "output_usd_per_1m": 5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 1,
+          "output_usd_per_1m": 5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 1,
+          "output_usd_per_1m": 5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-haiku-5-5",
+      "tier": "low",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1.1,
+          "long_context": {
+            "threshold_tokens": 100000,
+            "input_usd_per_1m": 0.5,
+            "output_usd_per_1m": 2.5,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 2,
+            "cache_read_multiplier": 0.1
+          }
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 100000,
+            "input_usd_per_1m": 0.5,
+            "output_usd_per_1m": 2.5,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 2,
+            "cache_read_multiplier": 0.1
+          }
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-sonnet-4-5",
+      "tier": "mid",
+      "context_window": 200000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-sonnet-4-6",
+      "tier": "mid",
+      "context_window": 200000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-sonnet-5",
+      "tier": "mid",
+      "context_window": 200000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-sonnet-5-5",
+      "tier": "mid",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-opus-4-0",
+      "tier": "unknown",
+      "context_window": 200000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 15,
+          "output_usd_per_1m": 75,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-opus-4-1",
+      "tier": "unknown",
+      "context_window": 200000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 15,
+          "output_usd_per_1m": 75,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 15,
+          "output_usd_per_1m": 75,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-opus-4-5",
+      "tier": "unknown",
+      "context_window": 200000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-opus-4-6",
+      "tier": "high",
+      "context_window": 200000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-opus-4-7",
+      "tier": "high",
+      "context_window": 200000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-opus-4-8",
+      "tier": "unknown",
+      "context_window": 200000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-opus-5",
+      "tier": "high",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-opus-5-5",
+      "tier": "high",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 4,
+          "output_usd_per_1m": 20,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "anthropic_gateway",
+          "input_usd_per_1m": 4,
+          "output_usd_per_1m": 20,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 4,
+          "output_usd_per_1m": 20,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 4,
+          "output_usd_per_1m": 20,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-fable-5",
+      "tier": "unknown",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 10,
+          "output_usd_per_1m": 50,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 10,
+          "output_usd_per_1m": 50,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-fable-5-1",
+      "tier": "high",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 10,
+          "output_usd_per_1m": 50,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.025,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 10,
+          "output_usd_per_1m": 50,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.025,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-fable-5-2",
+      "tier": "high",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 8,
+          "output_usd_per_1m": 40,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.025,
+          "us_inference_geo_multiplier": 1.1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 8,
+          "output_usd_per_1m": 40,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.025,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "claude-mythos-5-2",
+      "tier": "unknown",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "anthropic",
+          "input_usd_per_1m": 8,
+          "output_usd_per_1m": 40,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.025,
+          "us_inference_geo_multiplier": 1.1
+        }
+      ]
+    },
+    {
+      "id": "gpt-4.1-nano",
+      "tier": "low",
+      "context_window": 1047576,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-4.1-mini",
+      "tier": "low",
+      "context_window": 1047576,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.4,
+          "output_usd_per_1m": 1.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.4,
+          "output_usd_per_1m": 1.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-4.1",
+      "tier": "mid",
+      "context_window": 1047576,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 8,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 8,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-4o-mini",
+      "tier": "unknown",
+      "context_window": 128000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-4o",
+      "tier": "unknown",
+      "context_window": 128000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 2.5,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 2.5,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5-nano",
+      "tier": "unknown",
+      "context_window": 400000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.05,
+          "output_usd_per_1m": 0.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5-mini",
+      "tier": "unknown",
+      "context_window": 400000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.5,
+          "output_usd_per_1m": 2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 0.5,
+          "output_usd_per_1m": 2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.25,
+          "output_usd_per_1m": 2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5",
+      "tier": "high",
+      "context_window": 400000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 2.5,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 2.5,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 1.25,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5-chat",
+      "tier": "unknown",
+      "context_window": 400000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 2.5,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.4-nano",
+      "tier": "mid",
+      "context_window": 400000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.2,
+          "output_usd_per_1m": 1.25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.2,
+          "output_usd_per_1m": 1.25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.4-mini",
+      "tier": "mid",
+      "context_window": 400000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.75,
+          "output_usd_per_1m": 4.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.75,
+          "output_usd_per_1m": 4.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.4",
+      "tier": "high",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 2.5,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openai_gateway",
+          "input_usd_per_1m": 2.5,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 2.5,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.4-pro",
+      "tier": "high",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 30,
+          "output_usd_per_1m": 180,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 30,
+          "output_usd_per_1m": 180,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.5-nano",
+      "tier": "mid",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.5-mini",
+      "tier": "mid",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.5,
+          "output_usd_per_1m": 2.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.5",
+      "tier": "unknown",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 30,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 5,
+          "output_usd_per_1m": 30,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.5-pro",
+      "tier": "high",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 30,
+          "output_usd_per_1m": 180,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 30,
+          "output_usd_per_1m": 180,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.6-luna",
+      "tier": "mid",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.2,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 0.4,
+            "output_usd_per_1m": 1.8,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.1
+          }
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.2,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.6-luna-pro",
+      "tier": "unknown",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.2,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 0.4,
+            "output_usd_per_1m": 1.8,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.1
+          }
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.2,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.6-terra",
+      "tier": "high",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 12,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 4,
+            "output_usd_per_1m": 18,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.1
+          }
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 12,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "tier": "high",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 4,
+          "output_usd_per_1m": 20,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 8,
+            "output_usd_per_1m": 30,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.1
+          }
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 4,
+          "output_usd_per_1m": 20,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-5.6-sol-pro",
+      "tier": "unknown",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 4,
+          "output_usd_per_1m": 20,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 8,
+            "output_usd_per_1m": 30,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.1
+          }
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 4,
+          "output_usd_per_1m": 20,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "grok-4.5",
+      "tier": "high",
+      "context_window": 500000,
+      "providers": [
+        {
+          "provider": "xai",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "grok-4.6",
+      "tier": "high",
+      "context_window": 500000,
+      "providers": [
+        {
+          "provider": "xai",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "grok-4.7",
+      "tier": "high",
+      "context_window": 500000,
+      "providers": [
+        {
+          "provider": "xai",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "muse-spark-1.3",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "meta",
+          "input_usd_per_1m": 1.25,
+          "output_usd_per_1m": 4.25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.12,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "muse-ember-1.0",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "meta",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.04,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "muse-wonder-1.0",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "meta",
+          "input_usd_per_1m": 4,
+          "output_usd_per_1m": 20,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "meta/muse-spark-open",
+      "tier": "mid",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "together",
+          "input_usd_per_1m": 1.25,
+          "output_usd_per_1m": 4.25,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.12,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-2.0-flash-lite",
+      "tier": "unknown",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 0.075,
+          "output_usd_per_1m": 0.3,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-2.0-flash",
+      "tier": "unknown",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-2.5-flash-lite",
+      "tier": "unknown",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-2.5-flash",
+      "tier": "low",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 0.3,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-2.5-pro",
+      "tier": "unknown",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 1.25,
+          "output_usd_per_1m": 5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-3.1-flash-lite-preview",
+      "tier": "low",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-3-flash-preview",
+      "tier": "mid",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 0.5,
+          "output_usd_per_1m": 2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-3-pro-preview",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 8,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-3.1-pro-preview",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 8,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-3.5-flash",
+      "tier": "mid",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 1.5,
+          "output_usd_per_1m": 9,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-3.5-flash-lite",
+      "tier": "low",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 0.3,
+          "output_usd_per_1m": 2.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-3.6-flash",
+      "tier": "mid",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 1.5,
+          "output_usd_per_1m": 7.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-3.7-flash",
+      "tier": "mid",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 1.5,
+          "output_usd_per_1m": 7.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-3.8-flash",
+      "tier": "mid",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 1.5,
+          "output_usd_per_1m": 7.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "google/gemma-4-26b-a4b-it",
+      "tier": "low",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "qwen/qwen3-235b-a22b-2507",
+      "tier": "mid",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "bedrock",
+          "input_usd_per_1m": 0.2266,
+          "output_usd_per_1m": 0.9064,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.071,
+          "output_usd_per_1m": 0.463,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "qwen/qwen3-coder-next",
+      "tier": "mid",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "bedrock",
+          "input_usd_per_1m": 0.5,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.07,
+          "output_usd_per_1m": 0.3,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "qwen/qwen3-next-80b-a3b-instruct",
+      "tier": "mid",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "bedrock",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.09,
+          "output_usd_per_1m": 1.1,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash",
+      "tier": "unknown",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.14,
+          "output_usd_per_1m": 0.28,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "wafer",
+          "input_usd_per_1m": 0.28,
+          "output_usd_per_1m": 0.56,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "wafer_anthropic",
+          "input_usd_per_1m": 0.28,
+          "output_usd_per_1m": 0.56,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.25,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "tier": "low",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "makora",
+          "input_usd_per_1m": 0.2,
+          "output_usd_per_1m": 0.99,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.03,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 0.22,
+          "output_usd_per_1m": 0.66,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.031818181818181815,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash",
+      "tier": "low",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "deepinfra",
+          "input_usd_per_1m": 0.06,
+          "output_usd_per_1m": 0.18,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.06,
+          "output_usd_per_1m": 0.18,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "xiaomi/mimo-v2.6-flash",
+      "tier": "mid",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "makora",
+          "input_usd_per_1m": 0.13,
+          "output_usd_per_1m": 0.28,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.015384615384615385,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "deepinfra",
+          "input_usd_per_1m": 0.14,
+          "output_usd_per_1m": 0.28,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.02,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.14,
+          "output_usd_per_1m": 0.28,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "xiaomi/mimo-v2.6-pro",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "deepinfra",
+          "input_usd_per_1m": 0.435,
+          "output_usd_per_1m": 0.87,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.00827586,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.435,
+          "output_usd_per_1m": 0.87,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro",
+      "tier": "unknown",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 1.74,
+          "output_usd_per_1m": 3.48,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.0862,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.435,
+          "output_usd_per_1m": 0.87,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro-0813",
+      "tier": "mid",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 1.74,
+          "output_usd_per_1m": 3.48,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.0862,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.66,
+          "output_usd_per_1m": 1.98,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.03333333333333333,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "moonshotai/kimi-k2.5",
+      "tier": "high",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "bedrock",
+          "input_usd_per_1m": 0.6,
+          "output_usd_per_1m": 3,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.44,
+          "output_usd_per_1m": 2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "moonshotai/kimi-k2.6",
+      "tier": "high",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 0.95,
+          "output_usd_per_1m": 4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1684,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.95,
+          "output_usd_per_1m": 4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "moonshotai/kimi-k2.7",
+      "tier": "high",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 0.95,
+          "output_usd_per_1m": 4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "moonshotai/kimi-k3",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "wafer",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "wafer_anthropic",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "moonshotai/kimi-k3.1",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "together",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "xiaomi/mimo-v2.5-pro",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 1,
+          "output_usd_per_1m": 3,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "qwen/qwen3.6-35b-a3b",
+      "tier": "low",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 1,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "minimax/minimax-m2.7",
+      "tier": "high",
+      "context_window": 204800,
+      "providers": [
+        {
+          "provider": "together",
+          "input_usd_per_1m": 0.3,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "minimax",
+          "input_usd_per_1m": 0.3,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 0.3,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.5,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.279,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "minimax/minimax-m3.1-flash",
+      "tier": "high",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "together",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "minimax",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "minimax/minimax-m3",
+      "tier": "high",
+      "context_window": 512000,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 0.3,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "minimax",
+          "input_usd_per_1m": 0.3,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.3,
+          "output_usd_per_1m": 1.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "z-ai/glm-5",
+      "tier": "high",
+      "context_window": 202752,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 1,
+          "output_usd_per_1m": 3.2,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.6,
+          "output_usd_per_1m": 1.92,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "z-ai/glm-5.1",
+      "tier": "high",
+      "context_window": 202752,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 1.4,
+          "output_usd_per_1m": 4.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.18571428571428572,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.98,
+          "output_usd_per_1m": 3.08,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1836734693877551,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "z-ai/glm-5.2",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "together",
+          "input_usd_per_1m": 1.4,
+          "output_usd_per_1m": 4.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.18571428571428572,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 1.4,
+          "output_usd_per_1m": 4.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "z-ai/glm-5.3",
+      "tier": "high",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 1.4,
+          "output_usd_per_1m": 4.4,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.18571428571428572,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "tier": "low",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "deepinfra",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "makora",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "together",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "wafer",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "wafer_anthropic",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 2,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "mistralai/mistral-small-2603",
+      "tier": "mid",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.2,
+          "output_usd_per_1m": 0.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "qwen/qwen3-30b-a3b-instruct-2507",
+      "tier": "mid",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 0.15,
+          "output_usd_per_1m": 0.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1684,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.3,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "qwen/qwen3-coder",
+      "tier": "high",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 0.9,
+          "output_usd_per_1m": 2.7,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1684,
+          "us_inference_geo_multiplier": 1
+        },
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 1,
+          "output_usd_per_1m": 5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "qwen/qwen3.5-flash-02-23",
+      "tier": "low",
+      "context_window": 1000000,
+      "providers": [
+        {
+          "provider": "openrouter",
+          "input_usd_per_1m": 0.05,
+          "output_usd_per_1m": 0.15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "qwen/qwen3.7-plus",
+      "tier": "unknown",
+      "context_window": 262144,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 0.4,
+          "output_usd_per_1m": 1.6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.2,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "qwen/qwen3.8-max",
+      "tier": "high",
+      "context_window": 131072,
+      "providers": [
+        {
+          "provider": "fireworks",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 6,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.125,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gpt-6-astra",
+      "tier": "high",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 10,
+          "output_usd_per_1m": 50,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 20,
+            "output_usd_per_1m": 75,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "gpt-6-sol",
+      "tier": "high",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 4,
+            "output_usd_per_1m": 15,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "gpt-6.1-sol",
+      "tier": "high",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 4,
+            "output_usd_per_1m": 15,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "gpt-6.2-sol",
+      "tier": "high",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 4,
+            "output_usd_per_1m": 15,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "gpt-6.2-astra",
+      "tier": "high",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 8,
+          "output_usd_per_1m": 40,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 16,
+            "output_usd_per_1m": 60,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "tier": "mid",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 1,
+          "output_usd_per_1m": 5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 2,
+            "output_usd_per_1m": 7.5,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "gpt-6-luna",
+      "tier": "mid",
+      "context_window": 1050000,
+      "providers": [
+        {
+          "provider": "openai",
+          "input_usd_per_1m": 0.1,
+          "output_usd_per_1m": 0.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1,
+          "long_context": {
+            "threshold_tokens": 272000,
+            "input_usd_per_1m": 0.2,
+            "output_usd_per_1m": 0.75,
+            "cache_write_multiplier": 1.25,
+            "cache_write_1h_multiplier": 1.25,
+            "cache_read_multiplier": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "gemini-4-carbon",
+      "tier": "unknown",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-4-hydrogen",
+      "tier": "unknown",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 1.5,
+          "output_usd_per_1m": 7.5,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-4-argon",
+      "tier": "unknown",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 2,
+          "output_usd_per_1m": 10,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.1,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    },
+    {
+      "id": "gemini-4-neon",
+      "tier": "unknown",
+      "context_window": 1048576,
+      "providers": [
+        {
+          "provider": "google",
+          "input_usd_per_1m": 3,
+          "output_usd_per_1m": 15,
+          "cache_write_multiplier": 1.25,
+          "cache_write_1h_multiplier": 1.25,
+          "cache_read_multiplier": 0.05,
+          "us_inference_geo_multiplier": 1
+        }
+      ]
+    }
+  ]
+}
