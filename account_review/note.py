@@ -79,6 +79,9 @@ def note_input(review: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+DECISION = re.compile(r"\b(WIDEN|HOLD)\b")
+
+
 def number_check(note: str, data: dict[str, Any]) -> list[str]:
     allowed: set[float] = set()
     _numbers_in(data, allowed)
@@ -87,11 +90,14 @@ def number_check(note: str, data: dict[str, Any]) -> list[str]:
         value = float(raw.strip("$%").replace(",", ""))
         if not any(abs(value - a) <= max(0.051, 0.0051 * abs(a)) or round(a) == value for a in allowed):
             problems.append(f"{raw} is not in the review data")
-    for word in ("WIDEN", "HOLD"):
-        if word in note and word != data["decision"]:
-            problems.append(f"note says {word} but the gate says {data['decision']}")
-    if data["decision"] not in note:
+    # The note opens with its decision. A later mention of the other word ("rerun the
+    # gate and come back recommending WIDEN") is a plan, not the call, so only the
+    # first decision word is held to the gate.
+    stated = DECISION.search(note)
+    if not stated:
         problems.append(f"note does not state the decision {data['decision']}")
+    elif stated.group(0) != data["decision"]:
+        problems.append(f"note says {stated.group(0)} but the gate says {data['decision']}")
     return problems
 
 

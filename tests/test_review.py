@@ -225,6 +225,8 @@ def test_number_check_blocks_invented_numbers_and_wrong_decision():
     problems = note.number_check("WIDEN now: you saved $9,999 this week.", d)
     assert any("9,999" in p for p in problems)
     assert any("gate says HOLD" in p for p in problems)
+    ok = "HOLD: two engineers failed. Once fixed we will rerun and may recommend WIDEN."
+    assert not [p for p in note.number_check(ok, d) if "gate says" in p or "does not state" in p]
 
 
 def test_note_record_and_replay(tmp_path, monkeypatch):
