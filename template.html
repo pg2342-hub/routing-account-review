@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Routing Account Review</title>
+<meta name="description" content="A weekly account review built on a model router's routing-decision export: savings against each engineer's usual model, per-engineer health checks, and a go/no-go on widening routing from an opt-in group to the whole team.">
+<style>
+.head h1{margin:40px 0 14px}
+.head .lead{max-width:42em}
+.board{margin:32px 0 0;border:1px solid var(--rule);border-radius:16px;background:#fbfaf6;overflow:hidden;scroll-margin-top:24px}
+.bar-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:16px 24px;border-bottom:1px solid var(--rule)}
+.seg{display:flex;width:fit-content;max-width:100%;gap:2px;padding:3px;border:1px solid var(--rule);border-radius:999px;background:var(--paper)}
+.seg button{min-height:38px;padding:0 18px;border:0;border-radius:999px;background:transparent;color:var(--ink-2);font:500 15px/1 var(--sans);cursor:pointer;white-space:nowrap}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-checked=true]{background:var(--ink);color:var(--paper)}
+.cap{margin:0;color:var(--ink-2);font-size:15px}
+.vline{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px;align-items:center;padding:22px 24px 6px}
+.vline h2{all:unset;display:block;font:400 34px/1.1 var(--serif)}
+.vline p{grid-column:1/-1;margin:0;font-size:17px;max-width:46em}
+.gate{justify-self:end;display:inline-flex;align-items:center;min-height:34px;padding:0 16px;border-radius:999px;font:500 13px/1 var(--mono);letter-spacing:.06em;white-space:nowrap}
+.gate.nogo{background:var(--ink);color:var(--paper)}
+.gate.go{background:var(--green-wash);color:var(--green)}
+.tally{padding:18px 24px 22px}
+.stack{display:flex;gap:4px;height:22px}
+.stack i{flex:1 1 0;border-radius:4px}
+.k-pass{background:var(--green)}
+.k-fail{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.k-crit{background:var(--ink)}
+.counts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:14px}
+.counts div{display:flex;flex-direction:column;gap:4px}
+.counts b{font:400 32px/1 var(--serif);font-variant-numeric:tabular-nums}
+.counts span{color:var(--ink-2);font-size:14px;line-height:1.35}
+.eng{border-top:1px solid var(--rule);padding:18px 24px 22px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+button.tile{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:0 14px 12px;border:1px solid var(--rule);border-radius:12px;background:var(--paper);color:var(--ink);text-align:left;font:inherit;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s var(--ease)}
+button.tile::before{content:"";display:block;height:5px;margin:0 -14px 4px}
+button.tile.t-pass::before{background:var(--green)}
+button.tile.t-fail::before{background:var(--ink)}
+button.tile:hover{border-color:var(--ink);transform:translateY(-2px)}
+button.tile[aria-expanded=true]{border-color:var(--ink);box-shadow:0 0 0 1.5px var(--ink)}
+.tile .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tile .code{font:400 12.5px/1 var(--mono);color:var(--ink-2)}
+.tile .name{font:400 20px/1.2 var(--serif)}
+.tile .nums{display:flex;gap:14px;font-size:13px;color:var(--ink-2)}
+.tile .nums b{font:400 20px/1 var(--serif);color:var(--ink);margin-right:4px;font-variant-numeric:tabular-nums}
+.badge{min-height:24px;padding:0 10px;font-size:11.5px}
+.detail{border-top:1px solid var(--rule);padding:18px 24px 20px;background:var(--paper)}
+.detail h3{margin:0 0 4px;font:400 22px/1.2 var(--serif)}
+.detail .hint{margin:0;color:var(--ink-2);font-size:15px}
+.chk{list-style:none;margin:10px 0 0;padding:0}
+.chk li{display:grid;grid-template-columns:6em minmax(0,1fr) 9em;gap:6px 16px;align-items:baseline;padding:10px 0;border-top:1px solid var(--rule-soft)}
+.chk li:first-child{border-top:0}
+.chk .v{color:var(--ink-2);font:400 13px/1.4 var(--mono);text-align:right}
+.sev{display:inline-flex;align-items:center;justify-self:start;min-height:24px;padding:0 9px;border-radius:999px;border:1px solid var(--rule);font:500 11.5px/1 var(--mono)}
+.sev.pass{background:var(--green-wash);border-color:var(--green-wash);color:var(--green)}
+.sev.fail{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.sev.na{border-style:dashed}
+.legend{display:flex;flex-wrap:wrap;gap:6px 20px;padding:12px 24px;border-top:1px solid var(--rule);color:var(--ink-2);font-size:13px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:56px;align-items:start}
+.content h2{scroll-margin-top:24px}
+.side{position:sticky;top:24px;margin-top:64px;display:grid;gap:22px;font-size:14px;color:var(--ink-2)}
+.side h3{margin:0 0 6px;font:500 13px/1.3 var(--sans);color:var(--ink)}
+.side p{margin:0}
+.side nav a{display:block;padding:5px 0;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--rule-soft)}
+.side nav a:hover{color:var(--ink)}
+.side pre{font-size:12px;margin:6px 0 0;white-space:pre-wrap}
+.note{color:var(--ink-2);font-size:15px;max-width:44em;margin-top:14px}
+.card{border:1px solid var(--rule);border-radius:16px;background:#fbfaf6;padding:20px 22px}
+.bridge{display:grid;gap:12px}
+.brow{display:grid;grid-template-columns:minmax(0,15em) minmax(0,1fr) 6.5em;gap:12px;align-items:center}
+.brow .lab{font-size:15px}
+.brow .bar{height:22px;border-radius:4px}
+.brow .bar.docs{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.brow .bar.mid{background:repeating-linear-gradient(135deg,var(--ink) 0 1.5px,transparent 1.5px 6px);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.brow .bar.final{background:var(--green)}
+.brow .amt{font:400 22px/1 var(--serif);text-align:right;font-variant-numeric:tabular-nums}
+.letter{white-space:pre-wrap;font-size:16px;line-height:1.55;margin:0}
+.meta{margin:12px 0 0;color:var(--ink-2);font:400 13px/1.5 var(--mono)}
+.shadow-k{display:grid;gap:8px;margin-top:6px}
+.shadow-k div{display:grid;grid-template-columns:8em minmax(0,1fr);gap:12px;font-size:15px}
+.scroll{overflow-x:auto}
+table.t{border-collapse:collapse;width:100%;font-size:15px}
+table.t th,table.t td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+table.t th{font:500 13px/1.3 var(--sans);color:var(--ink-2)}
+@media (max-width:1000px){
+ .layout{grid-template-columns:minmax(0,1fr);gap:0}
+ .side{position:static;margin-top:48px}
+}
+@media (max-width:700px){
+ .bar-top,.vline,.tally,.eng,.detail,.legend{padding-left:16px;padding-right:16px}
+ .vline h2{font-size:28px}
+ .vline p{font-size:16px}
+ .counts{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ button.tile{padding:0 11px 10px}
+ button.tile::before{margin:0 -11px 2px}
+ .tile .nums{flex-wrap:wrap;gap:2px 10px}
+ .tile .code{font-size:11.5px}
+ .chk li{grid-template-columns:5em minmax(0,1fr)}
+ .chk .v{grid-column:2;text-align:left}
+ .brow{grid-template-columns:minmax(0,1fr) 5.5em}
+ .brow .bar{grid-column:1/-1;grid-row:2}
+ .seg button{padding:0 12px;font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){button.tile{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<div class="head">
+<h1>Routing account review</h1>
+<p class="lead">Each week of a model-routing rollout, this tool pulls the router's routing-decision export, prices every turn against the model the engineer would have used without routing, and checks each opt-in engineer's failures, tool-call errors, failovers and latency. It ends with one call for the engineering lead: widen routing to the whole team, or hold.</p>
+</div>
+
+<section class="board" id="board" aria-labelledby="verdict-h">
+  <div class="bar-top">
+    <div class="seg" role="radiogroup" aria-label="Which week to review">
+      <button type="button" role="radio" aria-checked="true" data-v="week1">Week 1</button>
+      <button type="button" role="radio" aria-checked="false" data-v="week2" tabindex="-1">Week 2, after the fix</button>
+    </div>
+    <p class="cap" id="cap"></p>
+  </div>
+  <div class="vline" aria-live="polite">
+    <h2 id="verdict-h"></h2>
+    <span class="gate" id="gate"></span>
+    <p id="takeaway"></p>
+  </div>
+  <div class="tally">
+    <div class="stack" id="stack" aria-hidden="true"></div>
+    <div class="counts" id="counts"></div>
+  </div>
+  <div class="eng"><div class="tiles" id="tiles"></div></div>
+  <div class="detail" id="detail" aria-live="polite"></div>
+  <div class="legend"><span><i class="k-pass"></i>passed every check</span><span><i class="k-fail"></i>failed a check</span><span><i class="k-crit"></i>failed the critical check (router-owned failures)</span></div>
+</section>
+
+<div class="layout">
+<div class="content">
+
+<h2 id="savings-h">Savings, counted two ways</h2>
+<p>The router's export docs include a query for computing savings yourself. On this account it reports far more than the account actually saved. Each bar below applies one fix, and the last one prices the same work with the router's own cost rules.</p>
+<div class="card"><div class="bridge" id="bridge"></div></div>
+<p class="note" id="bridge-note"></p>
+
+<h2 id="note-h">This week's note to the engineering lead</h2>
+<div class="card" id="letter"></div>
+
+<h2 id="shadow-h">Before go-live: shadow mode</h2>
+<div id="shadow"></div>
+
+<h2 id="checks-h">What it checks</h2>
+<div class="scroll"><table class="t" id="checks"><thead><tr><th>Check</th><th>Critical</th></tr></thead><tbody></tbody></table></div>
+<p class="note" id="gate-rule"></p>
+
+<h2 id="trust-h">Why the dollar figures can be trusted</h2>
+<p id="trust"></p>
+</div>
+
+<aside class="side" aria-label="About this build">
+  <nav aria-label="On this page"><a href="#board">Weekly review</a><a href="#savings-h">Savings, counted two ways</a><a href="#note-h">Note to the engineering lead</a><a href="#shadow-h">Shadow mode</a><a href="#checks-h">What it checks</a><a href="#trust-h">Why the figures can be trusted</a></nav>
+  <div><h3>Data</h3><p>The engineers, traffic and failure rates are made up for one example org of 40 engineers. Every row uses the field names of the open-source Weave Router's export schema, and every price comes from the router's own price book and cost code (weave-os/router, Apache-2.0). The weekly note is a real Claude reply to each week's review, recorded once and replayed. The shadow results are real answers from Weave's hosted router to the 24 made-up sample requests.</p></div>
+  <div><h3>Run it yourself</h3><p>Python 3.11 or later. From the repo folder:</p><pre>pip install -e ".[dev]"
+python -m account_review.cli synth --week week1 --out exports/week1.ndjson
+python -m account_review.cli review exports/week1.ndjson
+pytest -q</pre><p style="margin-top:8px">With a read-only analytics key, <code>pull</code> reads a live export instead.</p></div>
+  <div><a class="pill" href="https://github.com/pg2342-hub/routing-account-review">Code on GitHub</a></div>
+</aside>
+</div>
+</main>
+<script>
+const D = /*DATA*/null;
+let view = "week1", sel = null;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const usd = n => "$" + Number(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const CAPS = {week1:"First week with routing on for 10 opt-in engineers; 30 engineers stay on their usual model for comparison.",
+              week2:"Same people, after tool-heavy Claude Code turns were kept on Anthropic-family models."};
+const LABEL = {router_failures:"Router-owned failures",tool_args:"Unparseable tool arguments",failover:"Failovers",latency:"p90 latency vs comparison group",saves_money:"Saves money vs baseline"};
+const seg=[...document.querySelectorAll(".seg button")];
+function show(v){view=v;sel=null;seg.forEach(b=>{const on=b.dataset.v==v;b.setAttribute("aria-checked",String(on));b.tabIndex=on?0:-1;});render();}
+seg.forEach((b,i)=>{b.addEventListener("click",()=>show(b.dataset.v));b.addEventListener("keydown",e=>{if(!["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key))return;e.preventDefault();const n=seg[(i+1)%seg.length];show(n.dataset.v);n.focus();});});
+const state = e => { const c=e.checks||{}; if(c.router_failures=="fail") return "crit"; return Object.values(c).some(v=>v=="fail")?"fail":"pass"; };
+function render(){
+  const W=D.weeks[view], o=W.opt_in, s=o.savings, eng=W.engineers;
+  document.getElementById("cap").textContent=CAPS[view];
+  const widen=W.decision=="WIDEN", passing=eng.filter(e=>state(e)=="pass").length;
+  document.getElementById("verdict-h").textContent = widen?"Widen routing to the whole team":"Hold at the opt-in group";
+  const g=document.getElementById("gate"); g.className="gate "+(widen?"go":"nogo"); g.textContent=W.decision;
+  const failing=eng.filter(e=>state(e)!="pass").map(e=>e.user_id);
+  document.getElementById("takeaway").innerHTML = widen
+    ? `<b>${passing} of ${eng.length} opt-in engineers passed every check</b>, with no router-owned failures, and the group saved ${usd(s.savings_usd)} (${s.savings_pct}%) against their usual models.`
+    : `<b>${passing} of ${eng.length} opt-in engineers passed every check.</b> ${failing.join(" and ")} hit router-owned failures from tool arguments that broke when Claude Code turns were translated to other providers. The group still saved ${usd(s.savings_usd)} (${s.savings_pct}%).`;
+  document.getElementById("stack").innerHTML = eng.map(e=>`<i class="k-${state(e)}"></i>`).join("");
+  document.getElementById("counts").innerHTML = [
+    [usd(s.savings_usd),`saved this week (${s.savings_pct}% of ${usd(s.baseline_usd)})`],
+    [o.main_loop_turns.toLocaleString("en-US"),"main-loop turns routed"],
+    [o.router_failures,"router-owned failures"],
+    [`${passing}/${eng.length}`,"engineers passing every check"]].map(c=>`<div><b>${c[0]}</b><span>${c[1]}</span></div>`).join("");
+  document.getElementById("tiles").innerHTML = eng.map(e=>{const st=state(e);return `<button type="button" class="tile t-${st=="pass"?"pass":"fail"}" data-u="${e.user_id}" aria-expanded="${sel==e.user_id}" aria-controls="detail">
+    <span class="top"><span class="code">${e.client_app=="codex"?"Codex":"Claude Code"}</span><span class="badge ${st=="pass"?"go":"no-go"}">${st=="pass"?"OK":"FAIL"}</span></span>
+    <span class="name">${e.user_id}</span>
+    <span class="nums"><span><b>${Math.round(e.savings.savings_pct)}%</b>saved</span><span><b>${e.router_failure_pct.toFixed(1)}%</b>router failures</span></span></button>`;}).join("");
+  document.querySelectorAll("button.tile").forEach(b=>b.addEventListener("click",()=>{sel=sel==b.dataset.u?null:b.dataset.u;render();const n=document.querySelector(`button.tile[data-u="${sel||b.dataset.u}"]`);n&&n.focus();}));
+  const det=document.getElementById("detail");
+  if(sel){const e=eng.find(x=>x.user_id==sel), cmp=W.comparison_p90_ms[e.client_app];
+    const val={router_failures:`${e.router_failure_pct}% of ${e.actions}`,tool_args:`${e.bad_tool_args_pct}%`,failover:`${e.failover_pct}%`,latency:`${(e.p90_latency_ms/1000).toFixed(1)}s vs ${(cmp/1000).toFixed(1)}s`,saves_money:`${usd(e.savings.savings_usd)}`};
+    det.innerHTML=`<h3>${e.user_id} <span class="code" style="font:400 14px var(--mono);color:var(--ink-2)">${e.client_app=="codex"?"Codex":"Claude Code"}, ${e.main_loop_turns} main-loop turns, ${e.cross_format_pct}% translated across providers</span></h3><ul class="chk">${Object.entries(e.checks).map(([k,v])=>`<li><span class="sev ${v}">${v}</span><span>${LABEL[k]}</span><span class="v">${val[k]}</span></li>`).join("")}</ul>`;
+  } else det.innerHTML=`<p class="hint">Select an engineer to see each check and the number behind it.</p>`;
+  const B=W.bridge, max=Math.max(...B.map(b=>b.savings_usd));
+  document.getElementById("bridge").innerHTML=B.map((b,i)=>`<div class="brow"><span class="lab">${esc(b.step)}</span><div class="bar ${i==0?"docs":i==B.length-1?"final":"mid"}" style="width:${(100*b.savings_usd/max).toFixed(1)}%"></div><span class="amt">${usd(b.savings_usd)}</span></div>`).join("");
+  document.getElementById("bridge-note").textContent=`Opt-in group, ${view=="week1"?"week 1":"week 2"}: ${o.actions.toLocaleString("en-US")} model calls, ${s.subscription_rows.toLocaleString("en-US")} of them served on included Claude subscription quota. The docs query reports those turns as costing $0 against a full-price baseline, and it prices cached tokens at the full input rate on providers whose input count includes them. The corrected figure still assumes the usual model would have used the same tokens.`;
+  const N=W.note, L=document.getElementById("letter");
+  if(N && N.status && N.status!="not_recorded"){
+    L.innerHTML=`<p class="letter">${esc(N.text)}</p><p class="meta">${esc(N.model)}, ${N.input_tokens} in / ${N.output_tokens} out tokens, ${usd(N.cost_usd)}, ${N.latency_s}s. Number check: ${N.status=="ok"?"every figure in the note appears in the review":"BLOCKED, "+esc(N.problems.join("; "))}.</p>`;
+  } else L.innerHTML=`<p class="hint" style="margin:0">Claude drafts this note from the review data, and a number check blocks any figure (in digits) that is not in the review. The recorded reply for this week has not been added yet.</p>`;
+}
+const S=D.shadow, sh=document.getElementById("shadow");
+if(S){ sh.innerHTML=`<p>${S.requests} sample requests were sent to Weave's hosted router at <code>POST /v1/route</code>, which returns the model it would serve without calling it (recorded November 25, 2026). What it would pick, by kind of request:</p><div class="card shadow-k">${Object.entries(S.by_kind).map(([k,v])=>`<div><span>${esc(k.replace("_"," "))}</span><span>${Object.entries(v).map(([m,n])=>`${esc(m)} ${n}`).join(", ")}</span></div>`).join("")}</div>`; }
+else sh.innerHTML=`<p>Before any engineer is routed, <code>shadow</code> sends a sample of the account's requests to <code>POST /v1/route</code>, which returns the model the router would serve without calling a model, so it costs nothing. The repo includes 24 sample requests (questions, small edits, debugging, multi-file changes, design, chores). Its output has not been recorded here yet because it needs a router key.</p>`;
+const W1=D.weeks.week1;
+document.querySelector("#checks tbody").innerHTML=W1.checks.map(c=>`<tr><td>${esc(c.text)}</td><td>${c.critical?"Yes, one failure holds the rollout":"No"}</td></tr>`).join("");
+document.getElementById("gate-rule").textContent=`Each opt-in engineer is one case in golive-gate. To widen, at least 9 of the 10 must pass every check and none may fail the critical one.`;
+document.getElementById("trust").textContent=`Prices come from the router's own price book (${D.pricebook_models} models, the same data GET /v1/analytics/models serves). The cost code mirrors the router's Go functions, and the tests check it against ${D.vectors} costs computed by those Go functions on the same inputs, including cache reads and writes, 1-hour cache writes, long context and US inference. All ${D.vectors} match exactly. Every synthetic row is validated against the export's ${D.schema_fields}-field schema.`;
+render();
+</script>
+</body>
+</html>
