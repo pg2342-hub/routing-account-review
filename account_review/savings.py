@@ -148,8 +148,7 @@ def docs_sql_savings(rows: Iterable[Row], book: PriceBook) -> DocsSqlSavings:
         if ai is None or found is None:  # WHERE actual_input_cost_usd IS NOT NULL
             continue
         price = found[0]
-        out.baseline_usd += _i(row, "input_tokens") / 1e6 * price.input_per_1m \
-            + _i(row, "output_tokens") / 1e6 * price.output_per_1m
+        out.baseline_usd += _i(row, "input_tokens") / 1e6 * price.input_per_1m + _i(row, "output_tokens") / 1e6 * price.output_per_1m
         out.actual_usd += ai + (ao or 0.0)
         out.rows_priced += 1
     return out

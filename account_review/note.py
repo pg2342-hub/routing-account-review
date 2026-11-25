@@ -1,7 +1,8 @@
 """The weekly note to the account's engineering lead, drafted by Claude.
 
 Claude writes from the review JSON only. Before the note can go out, a number check
-requires every number in it to appear in the review (allowing the usual rounding),
+requires every figure written in digits to appear in the review (allowing the usual
+rounding; spelled-out numbers are not checked),
 and the decision word in the note to match the gate. Calls are recorded to
 recordings/ so CI and the demo replay them without a key.
 """
@@ -56,10 +57,15 @@ def _numbers_in(obj: Any, out: set[float]) -> None:
 
 def note_input(review: dict[str, Any]) -> dict[str, Any]:
     failing = [
-        {"user_id": e["user_id"], "client_app": e["client_app"],
-         "failed": [k for k, v in (e["checks"] or {}).items() if v == "fail"],
-         "router_failure_pct": e["router_failure_pct"], "bad_tool_args_pct": e["bad_tool_args_pct"]}
-        for e in review["engineers"] if any(v == "fail" for v in (e["checks"] or {}).values())
+        {
+            "user_id": e["user_id"],
+            "client_app": e["client_app"],
+            "failed": [k for k, v in (e["checks"] or {}).items() if v == "fail"],
+            "router_failure_pct": e["router_failure_pct"],
+            "bad_tool_args_pct": e["bad_tool_args_pct"],
+        }
+        for e in review["engineers"]
+        if any(v == "fail" for v in (e["checks"] or {}).values())
     ]
     return {
         "decision": review["decision"],
@@ -105,6 +111,7 @@ def draft(review: dict[str, Any], mode: str = "replay", client: Any = None) -> d
     else:
         if client is None:
             import anthropic
+
             client = anthropic.Anthropic()
         t0 = time.perf_counter()
         resp = client.messages.create(model=MODEL, max_tokens=1200, messages=[{"role": "user", "content": prompt}])

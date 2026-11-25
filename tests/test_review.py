@@ -13,13 +13,21 @@ BOOK = PriceBook.load()
 
 # --- pricing matches the router's Go code -------------------------------------------------
 
+
 def test_pricing_matches_router_go_vectors():
     vectors = json.loads((HERE / "cost_vectors.json").read_text())
     assert len(vectors) >= 100
     for v in vectors:
         geo = v["inference_geo"] or None
-        got_in = BOOK.input_cost(v["model"], v["provider"], v["input_tokens"], v["cache_creation_tokens"],
-                                 v["cache_read_tokens"], v["cache_creation_1h_tokens"], geo)
+        got_in = BOOK.input_cost(
+            v["model"],
+            v["provider"],
+            v["input_tokens"],
+            v["cache_creation_tokens"],
+            v["cache_read_tokens"],
+            v["cache_creation_1h_tokens"],
+            geo,
+        )
         prompt = prompt_tokens(v["input_tokens"], v["cache_creation_tokens"], v["cache_read_tokens"], v["provider"])
         got_out = BOOK.output_cost(v["model"], v["provider"], prompt, v["output_tokens"], geo)
         assert got_in == pytest.approx(v["input_cost_usd"], abs=1e-12), v
@@ -35,19 +43,31 @@ def test_gateway_rows_use_anthropic_token_convention():
 
 # --- savings --------------------------------------------------------------------------------
 
+
 def _row(**kw):
-    base = {"requested_model": "claude-opus-5-5", "decision_model": "claude-sonnet-5-5", "decision_provider": "anthropic",
-                "input_tokens": 2000, "output_tokens": 500, "cache_creation_tokens": 0, "cache_read_tokens": 80000,
-                "subscription_served": False}
+    base = {
+        "requested_model": "claude-opus-5-5",
+        "decision_model": "claude-sonnet-5-5",
+        "decision_provider": "anthropic",
+        "input_tokens": 2000,
+        "output_tokens": 500,
+        "cache_creation_tokens": 0,
+        "cache_read_tokens": 80000,
+        "subscription_served": False,
+    }
     base.update(kw)
-    i = BOOK.input_cost(base["decision_model"], base["decision_provider"], base["input_tokens"],
-                        base["cache_creation_tokens"], base["cache_read_tokens"])
-    p = prompt_tokens(base["input_tokens"], base["cache_creation_tokens"], base["cache_read_tokens"],
-                      base["decision_provider"])
+    i = BOOK.input_cost(
+        base["decision_model"], base["decision_provider"], base["input_tokens"], base["cache_creation_tokens"], base["cache_read_tokens"]
+    )
+    p = prompt_tokens(base["input_tokens"], base["cache_creation_tokens"], base["cache_read_tokens"], base["decision_provider"])
     o = BOOK.output_cost(base["decision_model"], base["decision_provider"], p, base["output_tokens"])
     sub = base["subscription_served"]
-    base.update(api_rate_input_cost_usd=i, api_rate_output_cost_usd=o,
-                actual_input_cost_usd=0.0 if sub else i, actual_output_cost_usd=0.0 if sub else o)
+    base.update(
+        api_rate_input_cost_usd=i,
+        api_rate_output_cost_usd=o,
+        actual_input_cost_usd=0.0 if sub else i,
+        actual_output_cost_usd=0.0 if sub else o,
+    )
     return base
 
 
@@ -89,6 +109,7 @@ def test_missing_price_is_skipped_not_zero():
 
 # --- synthetic export + review ------------------------------------------------------------
 
+
 @pytest.mark.parametrize("week", ["week1", "week2"])
 def test_synthetic_rows_fit_the_export_schema(week):
     assert export.validate(synth.generate(week)) == []
@@ -119,6 +140,7 @@ def test_docs_query_overstates_savings_on_this_account():
 
 # --- export client ------------------------------------------------------------------------
 
+
 def test_export_client_pages_dedupes_and_waits_out_429():
     calls, slept = [], []
     pages = [
@@ -138,12 +160,31 @@ def test_export_client_pages_dedupes_and_waits_out_429():
     assert "since=" in calls[1] and "cursor=c1" in calls[2] and "since=" not in calls[2]
 
 
+def test_export_client_raises_when_page_cap_is_hit():
+    def fetch(url, headers):
+        return 200, {"x-weave-next-cursor": "c", "x-weave-has-more": "true"}, b'{"id":"a","recorded_at":"1"}\n'
+
+    c = export.ExportClient("https://r.example", "ra_test", fetch=fetch, sleep=lambda s: None, max_pages=3)
+    with pytest.raises(RuntimeError, match="3 pages"):
+        c.decisions("2026-11-02T00:00:00Z")
+
+
+def test_new_export_columns_are_tolerated():
+    rows = synth.generate("week1")[:5]
+    rows[0]["some_future_column"] = 1
+    assert export.validate(rows) == []
+    assert export.unknown_columns(rows) == ["some_future_column"]
+    del rows[1]["id"]
+    assert export.validate(rows)
+
+
 def test_export_client_refuses_routing_key():
     with pytest.raises(ValueError):
         export.ExportClient("https://r.example", "rk_test")
 
 
 # --- shadow -------------------------------------------------------------------------------
+
 
 def test_shadow_posts_anthropic_body_and_summarizes():
     seen = []
@@ -163,6 +204,7 @@ def test_shadow_posts_anthropic_body_and_summarizes():
 
 # --- note number check --------------------------------------------------------------------
 
+
 def _review():
     return review.review(synth.generate("week1"), BOOK)
 
@@ -171,8 +213,10 @@ def test_number_check_passes_on_review_numbers():
     r = _review()
     d = note.note_input(r)
     s = d["savings"]
-    text = (f"HOLD for now. The opt-in group saved ${s['savings_usd']} ({s['savings_pct']}%) this week. "
-            "e08 and e22 failed router_failures; we will keep tool turns on Anthropic models.")
+    text = (
+        f"HOLD for now. The opt-in group saved ${s['savings_usd']} ({s['savings_pct']}%) this week. "
+        "e08 and e22 failed router_failures; we will keep tool turns on Anthropic models."
+    )
     assert note.number_check(text, d) == []
 
 
@@ -188,9 +232,15 @@ def test_note_record_and_replay(tmp_path, monkeypatch):
     r = _review()
     s = note.note_input(r)["savings"]
     text = f"HOLD. Savings were ${s['savings_usd']} ({s['savings_pct']}%). e08 and e22 hit tool errors."
-    fake = SimpleNamespace(messages=SimpleNamespace(create=lambda **kw: SimpleNamespace(
-        model="claude-opus-5-5", content=[SimpleNamespace(type="text", text=text)],
-        usage=SimpleNamespace(input_tokens=1500, output_tokens=120))))
+    fake = SimpleNamespace(
+        messages=SimpleNamespace(
+            create=lambda **kw: SimpleNamespace(
+                model="claude-opus-5-5",
+                content=[SimpleNamespace(type="text", text=text)],
+                usage=SimpleNamespace(input_tokens=1500, output_tokens=120),
+            )
+        )
+    )
     rec = note.draft(r, mode="record", client=fake)
     assert rec["status"] == "ok" and rec["cost_usd"] > 0
     again = note.draft(r, mode="replay")

@@ -100,8 +100,14 @@ class PriceBook:
         return self._default_provider.get(model)
 
     def input_cost(
-        self, model: str, provider: str, input_tokens: int, cache_creation: int, cache_read: int,
-        cache_creation_1h: int = 0, geo: str | None = None,
+        self,
+        model: str,
+        provider: str,
+        input_tokens: int,
+        cache_creation: int,
+        cache_read: int,
+        cache_creation_1h: int = 0,
+        geo: str | None = None,
     ) -> float | None:
         found = self.get(model, provider)
         if found is None:
@@ -112,12 +118,14 @@ class PriceBook:
         one_hour = min(max(cache_creation_1h, 0), max(cache_creation, 0))
         five_min = cache_creation - one_hour
         geo_mult = p.us_geo if geo == "us" else 1.0
-        return (fresh + five_min * p.cache_write + one_hour * p.cache_write_1h + cache_read * p.cache_read) \
-            / 1_000_000 * p.input_per_1m * geo_mult
+        return (
+            (fresh + five_min * p.cache_write + one_hour * p.cache_write_1h + cache_read * p.cache_read)
+            / 1_000_000
+            * p.input_per_1m
+            * geo_mult
+        )
 
-    def output_cost(
-        self, model: str, provider: str, prompt: int, output_tokens: int, geo: str | None = None
-    ) -> float | None:
+    def output_cost(self, model: str, provider: str, prompt: int, output_tokens: int, geo: str | None = None) -> float | None:
         found = self.get(model, provider)
         if found is None:
             return None

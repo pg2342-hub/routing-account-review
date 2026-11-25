@@ -10,10 +10,10 @@ A weekly account review for a model-routing rollout. It reads the routing-decisi
 
 1. **Shadow mode** (`shadow`). Before anyone is routed, it sends a sample of the account's requests to `POST /v1/route`, which returns the model the router would serve without calling a model.
 2. **Pull** (`pull`). It reads `GET /v1/analytics/routing-decisions` with a read-only `ra_` key. It pages with the cursor until `X-Weave-Has-More` is false, waits out 429s using `Retry-After`, and de-duplicates on `id`.
-3. **Price** (`pricing.py`). It mirrors the router's `catalog/cost.go`: cache writes and reads at their multipliers, 1-hour cache writes, long-context rates, US inference, and the provider token convention (Anthropic-family rows report `input_tokens` without cached tokens; other providers include them). `tests/cost_vectors.json` holds 108 costs computed by the router's own Go functions, and the tests require an exact match.
+3. **Price** (`pricing.py`). It mirrors the router's `catalog/cost.go`: cache writes and reads at their multipliers, 1-hour cache writes, long-context rates, US inference, and the provider token convention (Anthropic-family rows report `input_tokens` without cached tokens; other providers include them). Fast-mode turns (`speed = 'fast'`) are priced at standard rates, since the price book does not publish fast rates. `tests/cost_vectors.json` holds 108 costs computed by the router's own Go functions, and the tests require an exact match.
 4. **Savings** (`savings.py`). It compares the same token work at the baseline model (`blind_experiment_baseline_model`, else `requested_model`) with the served turn at API rates, so subscription-served turns are not counted as free. It also reproduces the query in the router's `docs/ANALYTICS_EXPORT.md` ("Computing savings yourself") and shows the gap between the two, one fix at a time.
 5. **Review and gate** (`review.py`). Each opt-in engineer is one [golive-gate](https://pypi.org/project/golive-gate/) case with five checks: router-owned failures (critical), unparseable tool arguments, failovers, p90 latency against the comparison group on the same client, and savings. To widen, 9 of 10 engineers must pass every check and none may fail the critical one.
-6. **Note** (`note.py`). Claude drafts the weekly note to the engineering lead from the review data only. A number check blocks any figure that is not in the review, and any note whose decision differs from the gate. Replies are recorded to `recordings/` and replayed in CI.
+6. **Note** (`note.py`). Claude drafts the weekly note to the engineering lead from the review data only. A number check blocks any figure (in digits) that is not in the review, and any note whose decision differs from the gate. Replies are recorded to `recordings/` by the manual `record` workflow and replayed in CI once they exist.
 
 ## Example run (synthetic data)
 
@@ -29,7 +29,7 @@ Run `python -m account_review.cli review exports/week1.ndjson` for the exact fig
 ```bash
 pip install -e ".[dev]"
 python -m account_review.cli synth --week week1 --out exports/week1.ndjson
-python -m account_review.cli review exports/week1.ndjson          # replays the recorded Claude note if present
+python -m account_review.cli review exports/week1.ndjson          # replays a recorded Claude note if one exists
 pytest -q
 
 # live

@@ -76,6 +76,8 @@ class ExportClient:
             cursor = headers.get("x-weave-next-cursor", "")
             if headers.get("x-weave-has-more", "false").lower() != "true" or not cursor:
                 break
+        else:
+            raise RuntimeError(f"export still had more rows after {self.max_pages} pages; narrow --since/--until or raise max_pages")
         return sorted(rows.values(), key=lambda r: (r.get("recorded_at", ""), r["id"]))
 
     def price_book(self) -> dict[str, Any]:
@@ -101,14 +103,19 @@ def schema_fields() -> dict[str, dict[str, Any]]:
     return {f["name"]: f for f in json.loads(SCHEMA_FILE.read_text())["fields"]}
 
 
+def unknown_columns(rows: Iterable[dict[str, Any]]) -> list[str]:
+    """Columns not in the bundled schema. The export docs say schema changes are additive,
+    so a newer router can add columns; these are reported as warnings, not errors."""
+    fields = schema_fields()
+    return sorted({k for row in rows for k in row if k not in fields})
+
+
 def validate(rows: Iterable[dict[str, Any]]) -> list[str]:
-    """Problems with rows against the export schema: unknown columns, nulls in non-null columns."""
+    """Problems with rows against the export schema: nulls or gaps in non-null columns.
+    Unknown columns are tolerated (see unknown_columns)."""
     fields = schema_fields()
     problems = []
     for row in rows:
-        for k in row:
-            if k not in fields:
-                problems.append(f"{row.get('id')}: unknown column {k}")
         for name, f in fields.items():
             if not f["nullable"] and row.get(name) is None:
                 problems.append(f"{row.get('id')}: {name} is required")

@@ -117,8 +117,7 @@ def comparison_p90(rows: Iterable[Row]) -> dict[str, float]:
 def build_checks(control_p90: dict[str, float]) -> CheckSet:
     checks = CheckSet()
 
-    @checks.check("router_failures", f"Router-owned failures at or under {THRESHOLDS['router_failure_pct']}% of actions",
-                  critical=True)
+    @checks.check("router_failures", f"Router-owned failures at or under {THRESHOLDS['router_failure_pct']}% of actions", critical=True)
     def _router(case, s: EngineerStats):
         return s.router_failure_pct <= THRESHOLDS["router_failure_pct"]
 
@@ -144,11 +143,13 @@ def build_checks(control_p90: dict[str, float]) -> CheckSet:
     return checks
 
 
-GATE = Gate.from_dict({
-    "name": "widen routing from the opt-in group to the whole team",
-    "max_critical_failures": 0,
-    "rules": [{"name": "opt-in engineers passing every check", "min_pass": 9}],
-})
+GATE = Gate.from_dict(
+    {
+        "name": "widen routing from the opt-in group to the whole team",
+        "max_critical_failures": 0,
+        "rules": [{"name": "opt-in engineers passing every check", "min_pass": 9}],
+    }
+)
 
 
 def review(rows: list[Row], book: PriceBook | None = None) -> dict[str, Any]:
@@ -161,9 +162,7 @@ def review(rows: list[Row], book: PriceBook | None = None) -> dict[str, Any]:
     result = run_eval(lambda uid: stats[uid], cases, checks, runs=1)
     gate = evaluate(GATE, result)
     opt_rows = [r for r in rows if r.get("blind_experiment_arm") == "router_on"]
-    per_case = {
-        cr.case_id: {cid: v.result for cid, v in cr.verdicts.items()} for cr in result.case_runs
-    }
+    per_case = {cr.case_id: {cid: v.result for cid, v in cr.verdicts.items()} for cr in result.case_runs}
     main_turns = sum(r.get("turn_type") == "main_loop" for r in opt_rows)
     return {
         "decision": "WIDEN" if gate.decision == GO else "HOLD",
@@ -180,9 +179,7 @@ def review(rows: list[Row], book: PriceBook | None = None) -> dict[str, Any]:
             "router_failures": sum(r.get("failure_owner") == "router" for r in opt_rows),
             "cross_format_actions": sum(bool(r.get("cross_format")) for r in opt_rows),
         },
-        "engineers": [
-            {**s.to_dict(), "checks": per_case.get(s.user_id)} for s in stats.values() if s.arm == "router_on"
-        ],
+        "engineers": [{**s.to_dict(), "checks": per_case.get(s.user_id)} for s in stats.values() if s.arm == "router_on"],
         "comparison_group": {
             "engineers": sum(s.arm == "passthrough" for s in stats.values()),
             "actions": sum(r.get("blind_experiment_arm") == "passthrough" for r in rows),

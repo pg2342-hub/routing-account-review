@@ -160,7 +160,7 @@ table.t th{font:500 13px/1.3 var(--sans);color:var(--ink-2)}
 
 <aside class="side" aria-label="About this build">
   <nav aria-label="On this page"><a href="#board">Weekly review</a><a href="#savings-h">Savings, counted two ways</a><a href="#note-h">Note to the engineering lead</a><a href="#shadow-h">Shadow mode</a><a href="#checks-h">What it checks</a><a href="#trust-h">Why the figures can be trusted</a></nav>
-  <div><h3>Data</h3><p>The engineers, traffic and failure rates are made up for one example org of 40 engineers. Every row uses the field names of the open-source Weave Router's export schema, and every price comes from the router's own price book and cost code (weave-os/router, Apache-2.0). The weekly note is a recorded Claude reply.</p></div>
+  <div><h3>Data</h3><p>The engineers, traffic and failure rates are made up for one example org of 40 engineers. Every row uses the field names of the open-source Weave Router's export schema, and every price comes from the router's own price book and cost code (weave-os/router, Apache-2.0). The weekly note is drafted by Claude and appears here only once a live run has been recorded.</p></div>
   <div><h3>Run it yourself</h3><p>Python 3.11 or later. From the repo folder:</p><pre>pip install -e ".[dev]"
 python -m account_review.cli synth --week week1 --out exports/week1.ndjson
 python -m account_review.cli review exports/week1.ndjson
@@ -200,7 +200,7 @@ function render(){
   document.getElementById("tiles").innerHTML = eng.map(e=>{const st=state(e);return `<button type="button" class="tile t-${st=="pass"?"pass":"fail"}" data-u="${e.user_id}" aria-expanded="${sel==e.user_id}" aria-controls="detail">
     <span class="top"><span class="code">${e.client_app=="codex"?"Codex":"Claude Code"}</span><span class="badge ${st=="pass"?"go":"no-go"}">${st=="pass"?"OK":"FAIL"}</span></span>
     <span class="name">${e.user_id}</span>
-    <span class="nums"><span><b>${Math.round(e.savings.savings_pct)}%</b>saved</span><span><b>${e.router_failure_pct.toFixed(1)}%</b>errors</span></span></button>`;}).join("");
+    <span class="nums"><span><b>${Math.round(e.savings.savings_pct)}%</b>saved</span><span><b>${e.router_failure_pct.toFixed(1)}%</b>router failures</span></span></button>`;}).join("");
   document.querySelectorAll("button.tile").forEach(b=>b.addEventListener("click",()=>{sel=sel==b.dataset.u?null:b.dataset.u;render();const n=document.querySelector(`button.tile[data-u="${sel||b.dataset.u}"]`);n&&n.focus();}));
   const det=document.getElementById("detail");
   if(sel){const e=eng.find(x=>x.user_id==sel), cmp=W.comparison_p90_ms[e.client_app];
@@ -213,7 +213,7 @@ function render(){
   const N=W.note, L=document.getElementById("letter");
   if(N && N.status && N.status!="not_recorded"){
     L.innerHTML=`<p class="letter">${esc(N.text)}</p><p class="meta">${esc(N.model)}, ${N.input_tokens} in / ${N.output_tokens} out tokens, ${usd(N.cost_usd)}, ${N.latency_s}s. Number check: ${N.status=="ok"?"every number in the note appears in the review":"BLOCKED, "+esc(N.problems.join("; "))}.</p>`;
-  } else L.innerHTML=`<p class="hint" style="margin:0">Claude drafts this note from the review data, and a number check blocks any figure that is not in the review. The recorded reply for this week has not been added yet.</p>`;
+  } else L.innerHTML=`<p class="hint" style="margin:0">Claude drafts this note from the review data, and a number check blocks any figure (in digits) that is not in the review. The recorded reply for this week has not been added yet.</p>`;
 }
 const S=D.shadow, sh=document.getElementById("shadow");
 if(S){ sh.innerHTML=`<p>${S.requests} sample requests were sent to <code>POST /v1/route</code>, which returns the model the router would serve without calling it. What it would pick, by kind of request:</p><div class="card shadow-k">${Object.entries(S.by_kind).map(([k,v])=>`<div><span>${esc(k.replace("_"," "))}</span><span>${Object.entries(v).map(([m,n])=>`${esc(m)} ${n}`).join(", ")}</span></div>`).join("")}</div>`; }

@@ -1,9 +1,9 @@
 """routing-account-review command line.
 
-  python -m account_review.cli synth --week week1 --out exports/week1.ndjson
-  python -m account_review.cli pull --since 2026-11-02T00:00:00Z --until 2026-11-09T00:00:00Z --out exports/live.ndjson
-  python -m account_review.cli review exports/week1.ndjson [--note replay|record|live] [--json out.json]
-  python -m account_review.cli shadow [--record]
+python -m account_review.cli synth --week week1 --out exports/week1.ndjson
+python -m account_review.cli pull --since 2026-11-02T00:00:00Z --until 2026-11-09T00:00:00Z --out exports/live.ndjson
+python -m account_review.cli review exports/week1.ndjson [--note replay|record|live] [--json out.json]
+python -m account_review.cli shadow [--record]
 """
 
 from __future__ import annotations
@@ -66,6 +66,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"wrote {len(rows)} rows to {args.out}")
     elif args.cmd == "review":
         rows = export.read_ndjson(args.ndjson)
+        extra = export.unknown_columns(rows)
+        if extra:
+            print(f"note: {len(extra)} column(s) not in the bundled schema, ignored: {', '.join(extra[:10])}", file=sys.stderr)
         problems = export.validate(rows)
         if problems:
             print("schema problems:", *problems[:10], sep="\n  ")
