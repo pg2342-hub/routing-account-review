@@ -20,7 +20,8 @@ WITH tokens AS (
     FROM tokens t
     -- baseline_bindings(model, provider): one row per baseline model, naming the
     -- provider you would otherwise have used, e.g. ('claude-opus-5-5', 'anthropic')
-    JOIN baseline_bindings b ON b.model = t.requested_model
+    JOIN baseline_bindings b
+      ON b.model = COALESCE(t.blind_experiment_baseline_model, t.requested_model)
     JOIN model_prices p ON p.model = b.model AND p.provider = b.provider
 )
 SELECT sum(baseline_usd - served_usd) AS savings_usd FROM priced;
