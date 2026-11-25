@@ -1,0 +1,174 @@
+{
+ "requests": 24,
+ "errors": 0,
+ "by_kind": {
+  "chore": {
+   "xiaomi/mimo-v2.6-pro": 4
+  },
+  "debug": {
+   "gpt-6.1-sol": 2,
+   "xiaomi/mimo-v2.6-pro": 2
+  },
+  "design": {
+   "gpt-6.1-sol": 3,
+   "xiaomi/mimo-v2.6-pro": 1
+  },
+  "multi_file": {
+   "xiaomi/mimo-v2.6-pro": 3,
+   "gpt-6.1-sol": 1
+  },
+  "question": {
+   "xiaomi/mimo-v2.6-pro": 4
+  },
+  "small_edit": {
+   "gpt-6-luna": 2,
+   "xiaomi/mimo-v2.6-pro": 2
+  }
+ },
+ "results": [
+  {
+   "id": "question-1",
+   "kind": "question",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "question-2",
+   "kind": "question",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "question-3",
+   "kind": "question",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "question-4",
+   "kind": "question",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "small_edit-1",
+   "kind": "small_edit",
+   "model": "gpt-6-luna",
+   "provider": "openai"
+  },
+  {
+   "id": "small_edit-2",
+   "kind": "small_edit",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "small_edit-3",
+   "kind": "small_edit",
+   "model": "gpt-6-luna",
+   "provider": "openai"
+  },
+  {
+   "id": "small_edit-4",
+   "kind": "small_edit",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "debug-1",
+   "kind": "debug",
+   "model": "gpt-6.1-sol",
+   "provider": "openai"
+  },
+  {
+   "id": "debug-2",
+   "kind": "debug",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "debug-3",
+   "kind": "debug",
+   "model": "gpt-6.1-sol",
+   "provider": "openai"
+  },
+  {
+   "id": "debug-4",
+   "kind": "debug",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "multi_file-1",
+   "kind": "multi_file",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "multi_file-2",
+   "kind": "multi_file",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "multi_file-3",
+   "kind": "multi_file",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "multi_file-4",
+   "kind": "multi_file",
+   "model": "gpt-6.1-sol",
+   "provider": "openai"
+  },
+  {
+   "id": "design-1",
+   "kind": "design",
+   "model": "gpt-6.1-sol",
+   "provider": "openai"
+  },
+  {
+   "id": "design-2",
+   "kind": "design",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "design-3",
+   "kind": "design",
+   "model": "gpt-6.1-sol",
+   "provider": "openai"
+  },
+  {
+   "id": "design-4",
+   "kind": "design",
+   "model": "gpt-6.1-sol",
+   "provider": "openai"
+  },
+  {
+   "id": "chore-1",
+   "kind": "chore",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "chore-2",
+   "kind": "chore",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "chore-3",
+   "kind": "chore",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  },
+  {
+   "id": "chore-4",
+   "kind": "chore",
+   "model": "xiaomi/mimo-v2.6-pro",
+   "provider": "deepinfra"
+  }
+ ]
+}

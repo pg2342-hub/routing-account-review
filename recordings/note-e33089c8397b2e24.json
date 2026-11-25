@@ -1,0 +1,8 @@
+{
+ "model": "claude-opus-5-5",
+ "text": "WIDEN: we recommend turning routing on for the whole team. Across the 10 opt-in engineers, routing served $139.69 against a $221 baseline, saving $81.31 (36.8%). That covers 2,565 priced rows, none skipped, including 588 subscription rows, over 1,552 main-loop turns. Every gate rule held on the 1 run evaluated with no critical failures, and no engineer failed a check against our thresholds: router failure 0.5%, failover 2.0%, bad tool args 0.5%, p90 latency ratio 1.2. This is the corrected savings figure and replaces the earlier docs SQL estimate. Next, we'll enable routing team-wide and keep the same checks running so any regression surfaces quickly.",
+ "input_tokens": 595,
+ "output_tokens": 1137,
+ "cost_usd": 0.02512,
+ "latency_s": 10.12
+}
