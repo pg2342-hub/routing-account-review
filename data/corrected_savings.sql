@@ -1,8 +1,9 @@
--- Proposed replacement for the 'Computing savings yourself' query in weave-os/router docs/ANALYTICS_EXPORT.md
 WITH tokens AS (
     SELECT d.*,
            COALESCE(d.cache_creation_tokens, 0) AS cache_write,
            COALESCE(d.cache_read_tokens, 0)     AS cache_read,
+           LEAST(COALESCE(d.cache_creation_1h_tokens, 0),
+                 COALESCE(d.cache_creation_tokens, 0)) AS cache_write_1h,
            GREATEST(
              CASE WHEN d.decision_provider IN ('anthropic', 'anthropic_gateway', 'wafer_anthropic')
                   THEN d.input_tokens
@@ -14,7 +15,8 @@ WITH tokens AS (
 ), priced AS (
     SELECT t.api_rate_input_cost_usd + t.api_rate_output_cost_usd AS served_usd,
            (t.fresh_input
-            + t.cache_write * p.cache_write_multiplier
+            + (t.cache_write - t.cache_write_1h) * p.cache_write_multiplier
+            + t.cache_write_1h * p.cache_write_1h_multiplier
             + t.cache_read  * p.cache_read_multiplier) / 1e6 * p.input_usd_per_1m
          + (t.output_tokens / 1e6) * p.output_usd_per_1m          AS baseline_usd
     FROM tokens t
